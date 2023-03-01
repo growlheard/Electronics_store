@@ -13,7 +13,7 @@ def test_calculate_total_price():
     item = Item("Телефон", 100, 2)
     # проверяем, что общая стоимость товара правильно рассчитывается
     assert item.calculate_total_price() == 200
-    assert item.calculate_total_price()
+
 
 
 # тестируем метод apply_discount
