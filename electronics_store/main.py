@@ -17,6 +17,13 @@ class Item:
         self.price = price
         self.quantity = quantity
         self.all.append(self)
+
+    def __repr__(self):
+        return f"{self.__class__.__name__}('{self.__name}', {self.price}, {self.quantity})"
+
+    def __str__(self):
+        return self.__name
+
     @property
     def name(self):
         """
@@ -71,5 +78,34 @@ class Item:
                 cls.items_list.append(item)
 
 
+class Phone(Item):
+    """
+        Класс Phone наследуемый от класса Ithem
+        """
 
+    def __init__(self, name, price, quantity, sim_card):
+        super().__init__(name, price, quantity)
+        self.sim_card = sim_card
+
+    def __repr__(self):
+        return f"{super().__repr__()},{self.sim_card}"
+
+    @property
+    def sim_card(self) -> int:
+        """Возвращаем кол-во сим-карт"""
+        return self.__sim_card
+
+    @sim_card.setter
+    def sim_card(self, sim_card: int):
+        """Обновляет количество сим-карт и выбрасывает исключение"""
+        if sim_card > 0:
+            self.__sim_card = sim_card
+        else:
+            raise ValueError('Количество физических SIM-карт должно быть целым числом больше нуля.')
+
+    def __add__(self, other):
+        if isinstance(other, Item):
+            return self.price + other.price
+        else:
+            raise ValueError("Эти данные сложению не подлежат")
 
