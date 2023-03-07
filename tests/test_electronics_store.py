@@ -1,6 +1,9 @@
 import os
+
+import pytest
+
 from electronics_store import __version__
-from electronics_store.main import Item
+from electronics_store.main import Item, Phone
 
 
 def test_version():
@@ -13,7 +16,6 @@ def test_calculate_total_price():
     item = Item("Телефон", 100, 2)
     # проверяем, что общая стоимость товара правильно рассчитывается
     assert item.calculate_total_price() == 200
-
 
 
 # тестируем метод apply_discount
@@ -53,3 +55,28 @@ def test_create_items_from_csv():
     assert item3.quantity == 5
 
 
+def test_sim_card_property():
+    # Проверяем что тест отрабатывает верно и возвращает ожидаемое значение
+    phone = Phone("Test Phone", 500, 5, 2)
+    assert phone.sim_card == 2
+
+
+def test_sim_card_setter():
+    # Проверяем, что setter для sim_card выбрасывает исключение
+    phone = Phone("Test Phone", 500, 5, 2)
+    with pytest.raises(ValueError):
+        phone.sim_card = 0
+
+
+def test_add_method():
+    # Проверяем, что метод add правильно складывает цены двух объектов
+    phone1 = Phone("Phone 1", 500, 5, 2)
+    phone2 = Phone("Phone 2", 700, 3, 1)
+    assert phone1 + phone2 == 1200
+
+
+def test_add_method_invalid_argument():
+    # Проверяем, что метод add выбрасывает исключение
+    phone = Phone("Test Phone", 500, 5, 2)
+    with pytest.raises(ValueError):
+        phone + 5
