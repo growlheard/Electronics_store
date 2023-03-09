@@ -97,7 +97,9 @@ class Phone(Item):
 
     @sim_card.setter
     def sim_card(self, sim_card: int):
-        """Обновляет количество сим-карт и выбрасывает исключение"""
+        """
+        Обновляет количество сим-карт и выбрасывает исключение
+        """
         if sim_card > 0:
             self.__sim_card = sim_card
         else:
@@ -109,3 +111,31 @@ class Phone(Item):
         else:
             raise ValueError("Эти данные сложению не подлежат")
 
+
+class MixinLog:
+    """
+    Доп функционал класса KeyBoard
+     """
+    def __init__(self, *args):
+        self._language = "EN"
+        super().__init__(*args)
+
+    @property
+    def language(self):
+        return self._language
+
+    def change_lang(self):
+        """
+        Метод для изменения языка
+        """
+        if self._language == "RU":
+            self._language = "EN"
+        else:
+            self._language = "RU"
+
+
+class KeyBoard(MixinLog, Item):
+    """
+    класс KeyBoard который наследуется от MixinLog и Ithem
+    """
+    pass
