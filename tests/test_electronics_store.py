@@ -3,7 +3,7 @@ import os
 import pytest
 
 from electronics_store import __version__
-from electronics_store.main import Item, Phone
+from electronics_store.main import Item, Phone, KeyBoard
 
 
 def test_version():
@@ -80,3 +80,17 @@ def test_add_method_invalid_argument():
     phone = Phone("Test Phone", 500, 5, 2)
     with pytest.raises(ValueError):
         phone + 5
+
+
+def test_change_lang_ru_to_en():
+    kb = KeyBoard('Dark', 9600, 5)
+    kb._language = "RU"
+    kb.change_lang()
+    assert kb._language == "EN"
+
+
+def test_change_lang_en_to_ru():
+    kb = KeyBoard('Dark', 9600, 5)
+    kb._language = "EN"
+    kb.change_lang()
+    assert kb._language == "RU"
