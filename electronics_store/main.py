@@ -1,5 +1,7 @@
 import csv
 
+from electronics_store.exceptions import InstantiateCSVError
+
 
 class Item:
     pay_rate = 1
@@ -68,14 +70,20 @@ class Item:
         """
         Считывает данные из csv файла и создает экземпляры класса
         """
-        with open(file_path, 'r') as csv_file:
-            reader = csv.DictReader(csv_file)
-            for row in reader:
-                name = row['name']
-                price = int(float(row['price'])) if cls.is_integer(row['price']) else float(row['price'])
-                quantity = int(float(row['quantity'])) if cls.is_integer(row['price']) else float(row['quantity'])
-                item = cls(name, price, quantity)
-                cls.items_list.append(item)
+        try:
+            with open(file_path, 'r') as csv_file:
+                reader = csv.DictReader(csv_file)
+                if 'name' not in reader.fieldnames or 'price' not in reader.fieldnames or 'quantity' not in reader.fieldnames:
+                    raise InstantiateCSVError("Файл item.csv поврежден")
+                for row in reader:
+                    name = row['name']
+                    price = int(float(row['price'])) if cls.is_integer(row['price']) else float(row['price'])
+                    quantity = int(float(row['quantity'])) if cls.is_integer(row['price']) else float(row['quantity'])
+                    item = cls(name, price, quantity)
+                    cls.items_list.append(item)
+        except FileNotFoundError:
+            raise FileNotFoundError("Отсутствует файл item.csv")
+
 
 
 class Phone(Item):
