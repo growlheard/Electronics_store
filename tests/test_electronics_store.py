@@ -38,19 +38,19 @@ def test_create_items_from_csv():
 
     # Проверяем атрибуты первого товара
     item1 = Item.items_list[0]
-    assert item1.name == 'Смартфон'
+    assert item1.name == 'Smartphone'
     assert item1.price == 100
     assert item1.quantity == 1
 
     # Проверяем атрибуты второго товара
     item2 = Item.items_list[1]
-    assert item2.name == 'Ноутбук'
+    assert item2.name == 'Notebook'
     assert item2.price == 1000
     assert item2.quantity == 3
 
     # Проверяем атрибуты третьего товара
     item3 = Item.items_list[2]
-    assert item3.name == "Кабель"
+    assert item3.name == "Cable"
     assert item3.price == 10
     assert item3.quantity == 5
 
