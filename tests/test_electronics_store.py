@@ -84,7 +84,7 @@ def test_add_method_invalid_argument():
 
 
 def test_change_lang_ru_to_en():
-    # Проверяем, что метод add выбрасывает исключение
+    # Проверяем, что метод меняет язык на EN
     kb = KeyBoard('Dark', 9600, 5)
     kb._language = "RU"
     kb.change_lang()
@@ -92,7 +92,7 @@ def test_change_lang_ru_to_en():
 
 
 def test_change_lang_en_to_ru():
-    # Проверяем, что метод add выбрасывает исключение
+    # Проверяем, что метод меняет язык на RU
     kb = KeyBoard('Dark', 9600, 5)
     kb._language = "EN"
     kb.change_lang()
